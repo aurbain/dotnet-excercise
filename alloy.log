@@ -1,0 +1,32 @@
+ts=2026-06-14T15:04:42.576206922Z level=info msg="Alloy is starting"
+ts=2026-06-14T15:04:42.576282914Z level=info msg="boringcrypto enabled" enabled=false
+ts=2026-06-14T15:04:42.576796981Z level=info msg="memory is not limited, skipping" package=github.com/KimMachineGun/automemlimit/memlimit
+ts=2026-06-14T15:04:42.576914043Z level=info msg="no peer discovery configured: both join and discover peers are empty" service=cluster
+ts=2026-06-14T15:04:42.578461271Z level=info msg="starting complete graph evaluation" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb
+ts=2026-06-14T15:04:42.578632254Z level=error msg="failed to evaluate config" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb node=prometheus.scrape.dotnet_app err="decoding configuration: missing required attribute \"forward_to\""
+ts=2026-06-14T15:04:42.578664104Z level=info msg="finished node evaluation" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb node_id=prometheus.scrape.dotnet_app duration=165.955µs
+ts=2026-06-14T15:04:42.578751272Z level=info msg="finished node evaluation" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb node_id=remotecfg duration=53.922µs
+ts=2026-06-14T15:04:42.578793179Z level=info msg="applying non-TLS config to HTTP server" service=http
+ts=2026-06-14T15:04:42.578818044Z level=info msg="finished node evaluation" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb node_id=http duration=32.967µs
+ts=2026-06-14T15:04:42.578859114Z level=info msg="finished node evaluation" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb node_id=cluster duration=9.22µs
+ts=2026-06-14T15:04:42.578903257Z level=info msg="finished node evaluation" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb node_id=labelstore duration=12.013µs
+ts=2026-06-14T15:04:42.578958295Z level=info msg="finished node evaluation" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb node_id=tracing duration=13.969µs
+ts=2026-06-14T15:04:42.579262265Z level=info msg="finished node evaluation" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb node_id=logging duration=265.974µs
+ts=2026-06-14T15:04:42.579350271Z level=info msg="finished node evaluation" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb node_id=otel duration=12.014µs
+ts=2026-06-14T15:04:42.579422352Z level=info msg="finished node evaluation" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb node_id=livedebugging duration=17.88µs
+ts=2026-06-14T15:04:42.579503094Z level=info msg="finished node evaluation" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb node_id=ui duration=11.176µs
+ts=2026-06-14T15:04:42.579543325Z level=info msg="finished complete graph evaluation" controller_path=/ controller_id="" trace_id=3a9d465d5bc8b31682ca7ee3a825baeb duration=1.187102ms
+ts=2026-06-14T15:04:42.579650329Z level=info msg="running usage stats reporter"
+Error: alloy.config:1:1: Failed to build component: decoding configuration: missing required attribute "forward_to"
+
+1 |   prometheus.scrape "dotnet_app" {
+  |  _^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2 | |   targets = [{ "__address__" = "localhost:5000" }]
+3 | |   scrape_interval = "15s"
+4 | | }
+  | |_^
+5 |   
+
+interrupt received
+Error: could not perform the initial load successfully
+2026/06/14 11:04:42 collector server run finished with error: could not perform the initial load successfully

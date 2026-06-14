@@ -1,0 +1,6 @@
+/home/aaron/dotnet/HelloWorldWebApp/obj/Debug/net10.0/HelloWorldWebApp.csproj.AssemblyReference.cache
+/home/aaron/dotnet/HelloWorldWebApp/obj/Debug/net10.0/rpswa.dswa.cache.json
+/home/aaron/dotnet/HelloWorldWebApp/obj/Debug/net10.0/HelloWorldWebApp.GeneratedMSBuildEditorConfig.editorconfig
+/home/aaron/dotnet/HelloWorldWebApp/obj/Debug/net10.0/HelloWorldWebApp.csproj.CoreCompileInputs.cache
+/home/aaron/dotnet/HelloWorldWebApp/obj/Debug/net10.0/HelloWorldWebApp.MvcApplicationPartsAssemblyInfo.cs
+/home/aaron/dotnet/HelloWorldWebApp/obj/Debug/net10.0/HelloWorldWebApp.MvcApplicationPartsAssemblyInfo.cache

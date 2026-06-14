@@ -1,0 +1,4 @@
+metrics.scrape "dotnet_app" {
+  targets = [{"__address__" = "localhost:5000"}]
+  scrape_interval = 15s
+}

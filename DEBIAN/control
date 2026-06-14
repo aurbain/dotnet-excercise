@@ -1,0 +1,8 @@
+Package: helloworldwebapp
+Version: 1.0.0
+Section: web
+Priority: optional
+Architecture: amd64
+Maintainer: Aaron <aaron@example.com>
+Description: .NET HelloWorldWebApp with Nginx and Systemd.
+Dependencies: dotnet-runtime, nginx

@@ -1,0 +1,36 @@
+[Unit]
+Description=HelloWorldWebApp (ASP.NET Core)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+
+# Run the published output, not bin/Debug.
+WorkingDirectory=/home/aaron/dotne/opt/helloworldwebapp/publish
+ExecStart=/usr/bin/dotnet /home/aaron/dotne/opt/helloworldwebapp/publis/opt/helloworldwebapp.dll
+
+# Run as a non-root user. Consider creating a dedicated user for production.
+User=aaron
+Group=aaron
+
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+KillSignal=SIGINT
+
+# Optional overrides (create /etc/default/helloworldwebapp if desired)
+EnvironmentFile=-/etc/default/helloworldwebapp
+
+Environment=ASPNETCORE_ENVIRONMENT=Production
+# If you use nginx as a reverse proxy, binding to localhost is recommended.
+Environment=ASPNETCORE_URLS=http://127.0.0.1:5000
+Environment=DOTNET_NOLOGO=true
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+
+# Basic hardening
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
