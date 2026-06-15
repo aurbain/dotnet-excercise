@@ -14,6 +14,7 @@ This project is a .NET web application that features an interactive "Running Hor
 - **Dynamic Frame Cycling**: The running horse cycles through four different images (`horse1.jpg` through `horse4.jpg`) as it moves across the screen.
 - **Health Monitoring**: Custom health checks for Disk Space and Database (mocked) with detailed JSON responses.
 - **Production Ready**: Includes a systemd service configuration and Nginx integration for deployment.
+- **Observability**: Prometheus metrics endpoint for real-time monitoring.
 
 ## Deployment Plan
 The deployment process is automated via `deploy.sh` and follows these steps:

@@ -10,3 +10,5 @@
 - Start the application: `sudo systemctl start HelloWorldWebApp.service`
 - Restart the application: `sudo systemctl restart HelloWorldWebApp.service`
 - Check status: `sudo systemctl status HelloWorldWebApp.service`
+
+It is ok to use sudo on this test linux image.

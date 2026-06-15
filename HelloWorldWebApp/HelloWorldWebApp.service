@@ -14,6 +14,10 @@ ExecStart=/usr/bin/dotnet /home/aaron/projects/dotnet-excercise/HelloWorldWebApp
 User=aaron
 Group=aaron
 
+# Run as a non-root user. Consider creating a dedicated user for production.
+User=aaron
+Group=aaron
+
 Restart=always
 RestartSec=5
 TimeoutStopSec=30
