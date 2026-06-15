@@ -7,8 +7,8 @@ After=network-online.target
 Type=simple
 
 # Run the published output, not bin/Debug.
-WorkingDirectory=/home/aaron/dotnet/HelloWorldWebApp/publish
-ExecStart=/usr/bin/dotnet /home/aaron/dotnet/HelloWorldWebApp/publish/HelloWorldWebApp.dll
+WorkingDirectory=/home/aaron/projects/dotnet-excercise/HelloWorldWebApp/publish
+ExecStart=/usr/bin/dotnet /home/aaron/projects/dotnet-excercise/HelloWorldWebApp/publish/HelloWorldWebApp.dll
 
 # Run as a non-root user. Consider creating a dedicated user for production.
 User=aaron

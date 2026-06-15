@@ -90,15 +90,31 @@ app.MapGet("/", () =>
 
       <script>
         const horse = document.getElementById('horse');
+        const images = ['/horse1.jpg', '/horse2.jpg', '/horse3.jpg', '/horse4.jpg'];
 
         horse.addEventListener('click', () => {
           const runner = horse.cloneNode(true);
           runner.removeAttribute('id');
           runner.classList.add('runner');
+          
+          let localCurrentImg = 0;
+          runner.src = images[localCurrentImg];
 
           // Randomize vertical position a bit so repeated clicks look fun
           const min = 25, max = 75;
           runner.style.top = (min + Math.random() * (max - min)) + '%';
+
+          // Cycle through images every 750ms for 3 seconds
+          let count = 0;
+          const interval = setInterval(() => {
+            count++;
+            if (count <= 4) {
+              localCurrentImg = (localCurrentImg + 1) % images.length;
+              runner.src = images[localCurrentImg];
+            } else {
+              clearInterval(interval);
+            }
+          }, 750);
 
           runner.addEventListener('animationend', () => runner.remove());
           document.body.appendChild(runner);

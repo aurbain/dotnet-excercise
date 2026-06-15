@@ -86,11 +86,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/aaron/dotnet/HelloWorldWebApp/HelloWorldWebApp.csproj",
+      "projectUniqueName": "/home/aaron/projects/dotnet-excercise/HelloWorldWebApp/HelloWorldWebApp.csproj",
       "projectName": "HelloWorldWebApp",
-      "projectPath": "/home/aaron/dotnet/HelloWorldWebApp/HelloWorldWebApp.csproj",
+      "projectPath": "/home/aaron/projects/dotnet-excercise/HelloWorldWebApp/HelloWorldWebApp.csproj",
       "packagesPath": "/home/aaron/.nuget/packages/",
-      "outputPath": "/home/aaron/dotnet/HelloWorldWebApp/obj/",
+      "outputPath": "/home/aaron/projects/dotnet-excercise/HelloWorldWebApp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/aaron/.nuget/NuGet/NuGet.Config"
