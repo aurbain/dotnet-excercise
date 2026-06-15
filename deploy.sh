@@ -29,6 +29,22 @@ dotnet publish -c Release -o ./publish \
     /p:BaseOutputPath=/tmp/hwwa_publish_bin/ \
     /p:MSBuildProjectExtensionsPath=/tmp/hwwa_publish_ext/
 
+# 1b. Install dependencies (Nginx, Alloy)
+echo "📥 Installing dependencies..."
+
+# Install Nginx if not installed
+if ! command -v nginx &> /dev/null; then
+    echo "Installing nginx..."
+    sudo apt-get update && sudo apt-get install -y nginx
+fi
+
+# Install Alloy if not installed
+if ! command -v alloy &> /dev/null; then
+    echo "Installing alloy..."
+    # Get the latest alloy release URL and install
+    curl -sL https://github.com/grafana/alloy/releases/download/v0.100.0/alloy-linux-amd64.tar.gz | tar xz -C /usr/bin/
+fi
+
 # 2. Permissions
 echo "🔑 Setting permissions..."
 sudo chown -R aaron:aaron "$APP_DIR"
@@ -39,6 +55,23 @@ echo "⚙️  Configuring systemd service..."
 sudo cp "$APP_DIR/$SERVICE_NAME" /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now "$SERVICE_NAME"
+
+# 3b. Configure Alloy agent
+echo "📊 Configuring Alloy monitoring agent..."
+sudo mkdir -p /etc/alloy
+cp "$APP_DIR/alloy.config" /etc/alloy/alloy.config
+
+# Copy alloy data directories to local storage
+if [ -d "$APP_DIR/data-alloy" ]; then
+    sudo mkdir -p /etc/alloy/data-alloy
+    sudo cp -r "$APP_DIR/data-alloy/prometheus.remote_write.local" /etc/alloy/data-alloy/
+fi
+
+# Start Alloy agent
+if [ -x /usr/bin/alloy ]; then
+    sudo systemctl daemon-reload
+    sudo systemctl enable --now alloy
+fi
 
 # 4. Nginx Configuration
 echo "🌐 Configuring Nginx..."

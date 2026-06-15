@@ -15,12 +15,22 @@ mkdir -p "$BUILD_DIR/opt/$PACKAGE_NAME"
 mkdir -p "$DEBIAN_DIR"
 mkdir -p "$BUILD_DIR/etc/nginx/sites-enabled"
 mkdir -p "$BUILD_DIR/lib/systemd/system"
+mkdir -p "$BUILD_DIR/opt/$PACKAGE_NAME/alloy"
+mkdir -p "$BUILD_DIR/etc/alloy"
+mkdir -p "$BUILD_DIR/opt/$PACKAGE_NAME/data-alloy"
+mkdir -p "$BUILD_DIR/opt/$PACKAGE_NAME/data-alloy/prometheus.remote_write.local/wal"
 
 echo "📂 Copying application binaries..."
 # Create the destination directory first
 mkdir -p "$BUILD_DIR/opt/$PACKAGE_NAME/publish"
 # Copy the content of the publish directory into the package's publish directory
 cp -r "$PUBLISH_DIR/." "$BUILD_DIR/opt/$PACKAGE_NAME/publish/"
+
+echo "📝 Copying Alloy configuration..."
+cp "$APP_SOURCE_DIR/../alloy.config" "$BUILD_DIR/opt/$PACKAGE_NAME/alloy/"
+cp "$APP_SOURCE_DIR/../alloy_seed.json" "$BUILD_DIR/opt/$PACKAGE_NAME/data-alloy/"
+cp "$APP_SOURCE_DIR/../data-alloy/prometheus.remote_write.local/wal/00000000" "$BUILD_DIR/opt/$PACKAGE_NAME/data-alloy/prometheus.remote_write.local/wal/"
+cp "$APP_SOURCE_DIR/../data-alloy/prometheus.remote_write.local/wal/00000001" "$BUILD_DIR/opt/$PACKAGE_NAME/data-alloy/prometheus.remote_write.local/wal/"
 
 echo "🌐 Configuring Nginx..."
 cp "$APP_SOURCE_DIR/nginx.conf" "$BUILD_DIR/etc/nginx/sites-enabled/helloworldwebapp"
@@ -31,7 +41,7 @@ cp "$APP_SOURCE_DIR/HelloWorldWebApp.service" "$BUILD_DIR/lib/systemd/system/Hel
 
 # Update paths in the service file to use /opt/helloworldwebapp
 # This ensures it works regardless of the user's home directory
-sed -i "s|$APP_SOURCE_DIR|/opt/$PACKAGE_NAME|g" "$BUILD_DIR/lib/systemd/system/HelloWorldWebApp.service"
+sed -i "s|/home/aaron/projects/dotnet-excercise/HelloWorldWebApp|/opt/$PACKAGE_NAME|g" "$BUILD_DIR/lib/systemd/system/HelloWorldWebApp.service"
 
 echo "📝 Creating control file..."
 cat <<EOF > "$DEBIAN_DIR/control"
@@ -41,8 +51,8 @@ Section: web
 Priority: optional
 Architecture: amd64
 Maintainer: Aaron <aaron@example.com>
-Description: .NET HelloWorldWebApp with Nginx and Systemd.
-Dependencies: dotnet-runtime, nginx
+Description: .NET HelloWorldWebApp with Nginx, Systemd, and Alloy monitoring.
+Dependencies: dotnet-runtime, nginx, alloy
 EOF
 
 echo "🚀 Creating post-installation script..."
@@ -52,6 +62,11 @@ set -e
 systemctl daemon-reload
 systemctl enable --now $PACKAGE_NAME.service
 nginx -t && systemctl reload nginx
+# Initialize Alloy agent if not already running
+if [ -x /usr/bin/alloy ]; then
+    nohup /usr/bin/alloy run &>/dev/null &
+    sleep 2
+fi
 EOF
 
 echo "🛑 Creating pre-removal script..."

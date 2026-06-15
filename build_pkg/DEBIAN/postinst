@@ -3,3 +3,8 @@ set -e
 systemctl daemon-reload
 systemctl enable --now helloworldwebapp.service
 nginx -t && systemctl reload nginx
+# Initialize Alloy agent if not already running
+if [ -x /usr/bin/alloy ]; then
+    nohup /usr/bin/alloy run &>/dev/null &
+    sleep 2
+fi
